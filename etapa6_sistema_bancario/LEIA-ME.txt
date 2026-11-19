@@ -1,0 +1,28 @@
+SISTEMA BANCÁRIO — ETAPA 6 (ENTREGA DE DADOS, SEM GRÁFICOS)
+
+ESTRUTURA
+- app.py: classes, regras do banco, integração Flask e persistência JSON.
+- templates/index.html: formulários, clientes, contas e histórico.
+- static/style.css: aparência da página.
+- dados_bancarios.json: arquivo de dados criado/atualizado automaticamente.
+
+INSTALAÇÃO NO WINDOWS
+1. Abra o CMD dentro desta pasta.
+2. Execute: python -m pip install flask
+3. Execute: python app.py
+4. Abra: http://127.0.0.1:5000
+
+COMO TESTAR
+1. Cadastre um cliente.
+2. Abra uma conta Corrente ou Poupança para o CPF cadastrado.
+3. Faça depósitos, saques e transferências.
+4. Confira o histórico na página.
+5. Os dados são salvos automaticamente em dados_bancarios.json.
+6. Feche e abra o programa novamente: os dados serão carregados do JSON.
+
+IMPORTANTE
+- Esta versão atende à parte de dados da Etapa 6: classe Transacao e persistência JSON.
+- Não inclui gráficos, pois a orientação para 19/11/2026 é apresentar os dados sem visualizações.
+- Não inclui a atividade extra de regressão linear nesta entrega.
+- As taxas de manutenção e rendimento da Etapa 5 foram mantidas como atributos, mas não são aplicadas automaticamente, pois o notebook da Etapa 6 não especifica percentuais.
+- O arquivo JSON é criado na primeira gravação. Não apague esse arquivo se quiser preservar os cadastros.

@@ -1,0 +1,106 @@
+[
+    {
+        "numero": "001",
+        "nome": "Agência UFS",
+        "clientes": [
+            {
+                "nome": "Ana Souza",
+                "cpf": "1134657281'",
+                "salario": 2500.0,
+                "telefone": "79999990001",
+                "contas": [
+                    {
+                        "numero": 1,
+                        "tipo": "Corrente",
+                        "saldo": 1250.0,
+                        "historico_transacoes": [
+                            {
+                                "tipo": "DEPOSITO",
+                                "valor": 1500.0,
+                                "data": "2026-11-10T10:00:00",
+                                "descricao": "Depósito 1"
+                            },
+                            {
+                                "tipo": "SAQUE",
+                                "valor": 250.0,
+                                "data": "2026-11-12T14:30:00",
+                                "descricao": "Saque 1"
+                            }
+                        ],
+                        "taxa_manutencao": 0.0
+                    },
+                    {
+                        "numero": 2,
+                        "tipo": "Poupança",
+                        "saldo": 800.0,
+                        "historico_transacoes": [
+                            {
+                                "tipo": "DEPOSITO",
+                                "valor": 800.0,
+                                "data": "2026-11-13T09:15:00",
+                                "descricao": "Depósito 1"
+                            }
+                        ],
+                        "taxa_rendimento": 0.0
+                    }
+                ]
+            },
+            {
+                "nome": "Carlos Lima",
+                "cpf": "12536127671",
+                "salario": 3200.0,
+                "telefone": "79999990002",
+                "contas": [
+                    {
+                        "numero": 3,
+                        "tipo": "Corrente",
+                        "saldo": 430.0,
+                        "historico_transacoes": [
+                            {
+                                "tipo": "DEPOSITO",
+                                "valor": 500.0,
+                                "data": "2026-11-14T11:20:00",
+                                "descricao": "Depósito 2"
+                            },
+                            {
+                                "tipo": "SAQUE",
+                                "valor": 70.0,
+                                "data": "2026-11-15T16:45:00",
+                                "descricao": "Saque 2"
+                            }
+                        ],
+                        "taxa_manutencao": 0.0
+                    }
+                ]
+            },
+            {
+                "nome": "ana",
+                "cpf": "22651717171",
+                "salario": 10000.0,
+                "telefone": "799988756644",
+                "contas": [
+                    {
+                        "numero": 4,
+                        "tipo": "Corrente",
+                        "saldo": 0.0,
+                        "historico_transacoes": [
+                            {
+                                "tipo": "DEPOSITO",
+                                "valor": 1111.0,
+                                "data": "2026-11-19T15:24:16",
+                                "descricao": "Depósito em conta"
+                            },
+                            {
+                                "tipo": "SAQUE",
+                                "valor": 1111.0,
+                                "data": "2026-11-19T15:24:20",
+                                "descricao": "Saque em conta"
+                            }
+                        ],
+                        "taxa_manutencao": 0.0
+                    }
+                ]
+            }
+        ]
+    }
+]

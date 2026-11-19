@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema Bancário — Etapa 6</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div>
+    <p class="eyebrow">PROGRAMAÇÃO A · ETAPA 6</p>
+    <h1>Sistema Bancário</h1>
+    <p>Cadastro, movimentações e persistência de dados em JSON</p>
+  </div>
+  <div class="total"><span>Patrimônio da agência</span><strong>R$ {{ '%.2f'|format(patrimonio) }}</strong></div>
+</header>
+
+<main>
+  {% with mensagens = get_flashed_messages(with_categories=true) %}
+    {% for categoria, mensagem in mensagens %}
+      <div class="alerta {{ categoria }}">{{ mensagem }}</div>
+    {% endfor %}
+  {% endwith %}
+
+  <section class="painel">
+    <h2>1. Cadastrar cliente</h2>
+    <form method="post" class="grade">
+      <input type="hidden" name="acao" value="cliente">
+      <label>Nome<input name="nome" required></label>
+      <label>CPF<input name="cpf" required></label>
+      <label>Salário<input name="salario" type="number" min="0" step="0.01" value="0"></label>
+      <label>Telefone<input name="telefone"></label>
+      <button>Cadastrar cliente</button>
+    </form>
+  </section>
+
+  <section class="painel">
+    <h2>2. Abrir conta</h2>
+    <form method="post" class="grade">
+      <input type="hidden" name="acao" value="conta">
+      <label>CPF do titular<input name="cpf" required></label>
+      <label>Tipo
+        <select name="tipo"><option>Corrente</option><option>Poupança</option></select>
+      </label>
+      <button>Abrir conta</button>
+    </form>
+  </section>
+
+  <section class="painel">
+    <h2>3. Realizar movimentação</h2>
+    <div class="colunas">
+      <form method="post">
+        <input type="hidden" name="acao" value="deposito">
+        <h3>Depósito</h3>
+        <label>Número da conta<input name="numero" type="number" required></label>
+        <label>Valor<input name="valor" type="number" min="0.01" step="0.01" required></label>
+        <button>Depositar</button>
+      </form>
+      <form method="post">
+        <input type="hidden" name="acao" value="saque">
+        <h3>Saque</h3>
+        <label>Número da conta<input name="numero" type="number" required></label>
+        <label>Valor<input name="valor" type="number" min="0.01" step="0.01" required></label>
+        <button>Sacar</button>
+      </form>
+      <form method="post">
+        <input type="hidden" name="acao" value="transferencia">
+        <h3>Transferência / PIX</h3>
+        <label>Conta de origem<input name="origem" type="number" required></label>
+        <label>Conta de destino<input name="destino" type="number" required></label>
+        <label>Valor<input name="valor" type="number" min="0.01" step="0.01" required></label>
+        <button>Transferir</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="painel">
+    <div class="linha-titulo">
+      <h2>4. Dados cadastrados</h2>
+      <form method="post"><input type="hidden" name="acao" value="salvar"><button class="secundario">Salvar JSON agora</button></form>
+    </div>
+    <h3>Clientes e contas</h3>
+    {% if clientes %}
+      {% for cliente in clientes %}
+        <div class="cliente">
+          <strong>{{ cliente.nome }}</strong> · CPF {{ cliente.cpf }} · Salário R$ {{ '%.2f'|format(cliente.salario) }}
+          <p>Patrimônio do cliente: <b>R$ {{ '%.2f'|format(cliente.calcular_patrimonio()) }}</b></p>
+          {% if cliente.contas %}
+            <ul>
+              {% for conta in cliente.contas %}
+                <li>Conta {{ conta.numero }} — {{ conta.tipo_conta() }} — Saldo: R$ {{ '%.2f'|format(conta.saldo) }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}<p>Este cliente ainda não possui conta.</p>{% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Nenhum cliente cadastrado ainda.</p>
+    {% endif %}
+  </section>
+
+  <section class="painel">
+    <h2>5. Histórico de transações</h2>
+    {% for conta in contas %}
+      <h3>Conta {{ conta.numero }} — {{ conta.cliente.nome }}</h3>
+      {% if conta.historico_transacoes %}
+        <div class="tabela-wrap"><table>
+          <thead><tr><th>Tipo</th><th>Valor</th><th>Data</th><th>Descrição</th></tr></thead>
+          <tbody>
+          {% for t in conta.historico_transacoes %}
+            <tr><td>{{ t.tipo }}</td><td>R$ {{ '%.2f'|format(t.valor) }}</td><td>{{ t.data }}</td><td>{{ t.descricao }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table></div>
+      {% else %}<p>Sem transações registradas.</p>{% endif %}
+    {% else %}
+      <p>Cadastre uma conta para começar o histórico.</p>
+    {% endfor %}
+  </section>
+  <p class="nota">Nesta entrega, os dados são apresentados em tabelas e listas. Os gráficos Plotly ficam para a apresentação de 01/12/2026.</p>
+</main>
+</body>
+</html>
